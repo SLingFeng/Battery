@@ -30,8 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
-//        UNNotificationSettings()
-        
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (success, error) in
             
         }
