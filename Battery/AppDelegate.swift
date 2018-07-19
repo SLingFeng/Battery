@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             self.endBackgroundTask()
         })
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.sendNot), name: NSNotification.Name("NinetyPercent"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.sendNot), name: NSNotification.Name("stopCharging"), object: nil)
         
         
         

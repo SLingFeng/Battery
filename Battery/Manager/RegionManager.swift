@@ -49,7 +49,16 @@ class RegionManager: NSObject, CLLocationManagerDelegate {
     }
     //后台进入启动
     public func startRegion() {
-
+        if dataArr?.count != 0 {
+            for obj in dataArr! {
+                self.regionObserve(model: obj)
+            }
+        }
+    }
+    //停止
+    public func stopRegion() {
+        locationManager.stopMonitoringSignificantLocationChanges()
+        locationManager.stopUpdatingLocation()
     }
     
     func regionObserve(model : RegionModel) {
@@ -69,7 +78,7 @@ class RegionManager: NSObject, CLLocationManagerDelegate {
             locationManager.startMonitoring(for: fkit)
             locationManager.requestState(for: fkit)
         }else {
-            _ = UIAlertView(title: "提醒", message: "您的设备不支持定位", delegate: nil, cancelButtonTitle: "确定").show()
+//            _ = UIAlertView(title: "提醒", message: "您的设备不支持定位", delegate: nil, cancelButtonTitle: "确定").show()
 //            let ac = UIAlertController(title: "提醒", message: "您的设备不支持定位", preferredStyle: UIAlertControllerStyle.alert)
         }
 
@@ -126,13 +135,13 @@ class RegionManager: NSObject, CLLocationManagerDelegate {
     }
     // 区域状态改变
     func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
-        if dataArr?.count != 0 {
-            let obj = dataArr?[0]
-            obj?.startTime = NSDate()
-            managedContext.refresh(obj!, mergeChanges: true)
-            do {try managedContext.save()} catch {}
-
-        }
+//        if dataArr?.count != 0 {
+//            let obj = dataArr?[0]
+//            obj?.startTime = NSDate()
+//            managedContext.refresh(obj!, mergeChanges: true)
+//            do {try managedContext.save()} catch {}
+//
+//        }
     }
     
     //重复不保存
