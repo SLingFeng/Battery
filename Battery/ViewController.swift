@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 class ViewController: UIViewController {
 
@@ -16,13 +17,6 @@ class ViewController: UIViewController {
         
         print(NSHomeDirectory())
         
-//        let rm = RegionManager.shareInstance()
-//        rm.locationManager.startUpdatingLocation()
-
-    }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        print(RegionManager.shareInstance())
     }
     
     override func didReceiveMemoryWarning() {

@@ -10,7 +10,7 @@ import UIKit
 import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
@@ -38,23 +38,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.endBackgroundTask()
         })
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.endBackgroundTask), name: NSNotification.Name("NinetyPercent"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.sendNot), name: NSNotification.Name("NinetyPercent"), object: nil)
+        
+        
         
         return true
     }
     
-    @objc func endBackgroundTask() {
+    func endBackgroundTask() {
         //如果已存在后台任务，先将其设为完成
         if self.backgroundTaskIdentifier != UIBackgroundTaskInvalid {
+            self.timer?.invalidate()
+
             UIApplication.shared.endBackgroundTask(self.backgroundTaskIdentifier)
             self.backgroundTaskIdentifier = UIBackgroundTaskInvalid
         }
         
-//        self.timer?.invalidate()
 //        // 标记指定的后台任务完成
 //        UIApplication.shared.endBackgroundTask(backgroundTaskIdentifier)
 //        // 销毁后台任务标识符
 //        self.backgroundTaskIdentifier = UIBackgroundTaskInvalid;
+        
+    }
+    
+    @objc func sendNot() {
+        self.endBackgroundTask()
+        
+        let s = UNMutableNotificationContent()
+        s.title = "充满90%电量"
+        s.body = ""
+        s.sound = UNNotificationSound.default()
+        
+        let time = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        
+        UNUserNotificationCenter.current().add(UNNotificationRequest(identifier: "q", content: s, trigger: time)) { (error) in
+            
+        }
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
     }
 
