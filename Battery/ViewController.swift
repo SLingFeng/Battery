@@ -15,6 +15,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        let label = UILabel(frame: CGRect.init(x: 0, y: 0, width: 100, height: 20))
+//        label.text = "123"
+//        self.navigationController?.navigationItem.titleView = label;
+        self.navigationController?.navigationItem.title = "ssss"
+        
         print(NSHomeDirectory())
         
     }
